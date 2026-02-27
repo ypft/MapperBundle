@@ -24,7 +24,7 @@ class EntityPreLoaderCompilerPassTest extends TestCase
 
         $this->assertSame(
             ORMPreLoader::class,
-            $container->getDefinition('mapper.preloader')->getClass()
+            $container->getDefinition('mapper.preloader')->getClass(),
         );
     }
 
@@ -39,7 +39,7 @@ class EntityPreLoaderCompilerPassTest extends TestCase
 
         $this->assertSame(
             ODMPreLoader::class,
-            $container->getDefinition('mapper.preloader')->getClass()
+            $container->getDefinition('mapper.preloader')->getClass(),
         );
     }
 
@@ -53,7 +53,7 @@ class EntityPreLoaderCompilerPassTest extends TestCase
 
         $this->assertSame(
             'OriginalClass',
-            $container->getDefinition('mapper.preloader')->getClass()
+            $container->getDefinition('mapper.preloader')->getClass(),
         );
     }
 }

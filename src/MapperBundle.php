@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MapperBundle;
 
+use MapperBundle\DependencyInjection\CompilerPass\AutoMapperAdapterCompilerPass;
 use MapperBundle\DependencyInjection\CompilerPass\EntityPreLoaderCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -16,5 +19,6 @@ class MapperBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new EntityPreLoaderCompilerPass());
+        $container->addCompilerPass(new AutoMapperAdapterCompilerPass());
     }
 }

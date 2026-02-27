@@ -12,6 +12,9 @@
     "phpdocumentor/reflection-docblock": "^5.6",
     "symfony/property-info": "^6.0|^7.0"
   },
+  "suggest": {
+    "jolicode/automapper": "Alternative high-performance automapper library (configure via mapper.automapper: jolicode)"
+  },
   "config": {
     "bin-dir": "bin",
     "symfony/runtime": true
@@ -23,7 +26,8 @@
     "doctrine/orm": "*",
     "symfony/yaml": "*",
     "phpstan/phpstan": "^2.0",
-    "friendsofphp/php-cs-fixer": "^3.0"
+    "friendsofphp/php-cs-fixer": "^3.0",
+    "jolicode/automapper": "^9.5"
   },
   "autoload":     {
     "psr-4": { "MapperBundle\\": "src/" }
