@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace MapperBundle\DependencyInjection\CompilerPass;
 
+use MapperBundle\PreLoader\ODMPreLoader;
 use MapperBundle\PreLoader\ORMPreLoader;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -24,7 +25,7 @@ class EntityPreLoaderCompilerPass implements CompilerPassInterface
         if (true === $container->hasDefinition('doctrine_mongodb')) {
             $container
                 ->findDefinition('mapper.preloader')
-                ->setClass(ORMPreLoader::class)
+                ->setClass(ODMPreLoader::class)
             ;
         }
     }
