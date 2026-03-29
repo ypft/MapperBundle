@@ -49,7 +49,6 @@ class AutoMapperAdapterCompilerPassTest extends TestCase
         $compilerPass = new AutoMapperAdapterCompilerPass();
         $compilerPass->process($container);
 
-        // Should not throw any exception
-        $this->assertTrue(true);
+        self::assertFalse($container->hasAlias(AutoMapperAdapterInterface::class));
     }
 }

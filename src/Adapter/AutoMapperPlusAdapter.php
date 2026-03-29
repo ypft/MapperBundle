@@ -77,7 +77,8 @@ class AutoMapperPlusAdapter implements AutoMapperAdapterInterface
         }
 
         // check for version symfony/property-info (v6.0.0) compatibility
-        if (!class_exists(PropertyInfoExtractor::class)) {
+        /* @phpstan-ignore function.alreadyNarrowedType */
+        if (!method_exists(PropertyInfoExtractor::class, 'getType')) {
             $this->createSchemaForMappingOld($destination);
 
             return;

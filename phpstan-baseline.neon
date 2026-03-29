@@ -25,30 +25,6 @@ parameters:
 			path: src/PreLoader/ORMPreLoader.php
 
 		-
-			message: '#^Call to an undefined method AutoMapperPlus\\AutoMapperInterface\:\:expects\(\)\.$#'
-			identifier: method.notFound
-			count: 6
-			path: tests/TestCase/Unit/Mapper/MapperTest.php
-
-		-
-			message: '#^Call to an undefined method AutoMapperPlus\\AutoMapperInterface\:\:method\(\)\.$#'
-			identifier: method.notFound
-			count: 3
-			path: tests/TestCase/Unit/Mapper/MapperTest.php
-
-		-
-			message: '#^Call to an undefined method MapperBundle\\PreLoader\\PreloaderInterface\:\:expects\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/TestCase/Unit/Mapper/MapperTest.php
-
-		-
-			message: '#^Call to an undefined method Symfony\\Component\\PropertyInfo\\PropertyInfoExtractor\:\:method\(\)\.$#'
-			identifier: method.notFound
-			count: 2
-			path: tests/TestCase/Unit/Mapper/MapperTest.php
-
-		-
 			message: '#^Parameter \#2 \$destination of method MapperBundle\\Mapper\\Mapper\:\:convertCollection\(\) expects class\-string\<array\>, string given\.$#'
 			identifier: argument.type
 			count: 3
@@ -59,12 +35,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: tests/TestCase/Unit/Mapper/MapperTest.php
-
-		-
-			message: '#^Call to an undefined method Doctrine\\ORM\\EntityManagerInterface\:\:method\(\)\.$#'
-			identifier: method.notFound
-			count: 3
-			path: tests/TestCase/Unit/PreLoader/ORMPreLoaderTest.php
 
 		-
 			message: '#^Access to an undefined property Doctrine\\Persistence\\Proxy&PHPUnit\\Framework\\MockObject\\MockObject\:\:\$name\.$#'

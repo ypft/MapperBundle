@@ -94,7 +94,6 @@ class JoliCodeMapperTest extends TestCase
 
         $result = $this->mapper->convertToArray($source);
 
-        self::assertIsArray($result);
         self::assertArrayHasKey('createdAt', $result);
         self::assertArrayHasKey('updatedAt', $result);
     }
