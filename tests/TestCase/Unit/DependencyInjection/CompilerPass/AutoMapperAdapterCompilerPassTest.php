@@ -25,23 +25,6 @@ class AutoMapperAdapterCompilerPassTest extends TestCase
         $this->assertSame(AutoMapperPlusAdapter::class, (string) $alias);
     }
 
-    public function testProcessWithJolicodeThrowsExceptionWhenNotInstalled(): void
-    {
-        // Skip this test if JoliCode AutoMapper is actually installed
-        if (interface_exists(\AutoMapper\AutoMapperInterface::class)) {
-            $this->markTestSkipped('JoliCode AutoMapper is installed');
-        }
-
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('JoliCode AutoMapper is not installed');
-
-        $container = new ContainerBuilder();
-        $container->setParameter('mapper.automapper', 'jolicode');
-
-        $compilerPass = new AutoMapperAdapterCompilerPass();
-        $compilerPass->process($container);
-    }
-
     public function testProcessWithoutParameterDoesNothing(): void
     {
         $container = new ContainerBuilder();

@@ -16,10 +16,6 @@ class JoliCodeMapperTest extends TestCase
 
     protected function setUp(): void
     {
-        if (!class_exists(\AutoMapper\AutoMapper::class)) {
-            $this->markTestSkipped('JoliCode AutoMapper is not installed');
-        }
-
         $adapter = new JoliCodeAdapter();
 
         $this->mapper = new Mapper(
