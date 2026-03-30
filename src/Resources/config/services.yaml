@@ -13,7 +13,7 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     MapperBundle\:
         resource: '../../*'
-        exclude: '../../{DependencyInjection,PreLoader}'
+        exclude: '../../{DependencyInjection,PreLoader,Adapter}'
 
     Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor:
     Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor:
@@ -30,3 +30,13 @@ services:
 
     mapper.preloader:
         class: MapperBundle\PreLoader\NullPreLoader
+
+    # AutoMapperPlus adapter (default)
+    MapperBundle\Adapter\AutoMapperPlusAdapter:
+        arguments:
+            $autoMapper: '@AutoMapperPlus\AutoMapperInterface'
+            $extractor: '@Symfony\Component\PropertyInfo\PropertyInfoExtractor'
+
+    # Adapter interface alias - will be overridden by compiler pass based on configuration
+    MapperBundle\Adapter\AutoMapperAdapterInterface:
+        alias: 'MapperBundle\Adapter\AutoMapperPlusAdapter'

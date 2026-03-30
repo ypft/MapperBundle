@@ -41,3 +41,50 @@ Configure mappings
 ```shell
 composer test:run
 ```
+
+## AutoMapper Library Configuration
+
+MapperBundle supports two automapper libraries:
+- **AutoMapperPlus** (default) - [mark-gerarts/auto-mapper-plus](https://github.com/mark-gerarts/auto-mapper-plus)
+- **JoliCode AutoMapper** - [jolicode/automapper](https://github.com/jolicode/automapper)
+
+### Using AutoMapperPlus (Default)
+
+No additional configuration needed. AutoMapperPlus is used by default.
+
+### Using JoliCode AutoMapper
+
+1. Install JoliCode AutoMapper:
+```sh
+composer require jolicode/automapper
+```
+
+2. Register the JoliCode AutoMapper bundle in `config/bundles.php`:
+```php
+<?php
+
+return [
+    MapperBundle\MapperBundle::class => ['all' => true],
+    AutoMapper\Symfony\Bundle\AutoMapperBundle::class => ['all' => true],
+];
+```
+
+3. Configure MapperBundle to use JoliCode in `config/packages/mapper.yaml`:
+```yaml
+mapper:
+    automapper: jolicode
+```
+
+### Feature Compatibility
+
+| Feature | AutoMapperPlus | JoliCode AutoMapper |
+|---------|---------------|---------------------|
+| Basic mapping | ✅ | ✅ |
+| Collection mapping | ✅ | ✅ |
+| Array to object | ✅ | ✅ |
+| Object to array | ✅ | ✅ |
+| PreLoader (usePreLoad) | ✅ | ❌ |
+| Custom PropertyAccessors | ✅ | ❌ |
+| Auto-configuration | ✅ | ✅ (native) |
+
+**Note:** Custom features like `usePreLoad` and custom `PropertyAccessors` (DoctrineProxyPropertyAccessor, MergePropertyAccessor) are only available when using AutoMapperPlus. JoliCode AutoMapper uses its own native features for similar functionality.

@@ -13,12 +13,13 @@ use MapperBundle\Tests\TestCase\Unit\Stubs\Entity\SourceEntity;
 use MapperBundle\Tests\TestCase\Unit\Stubs\Entity\TargetEntity;
 use MapperBundle\Tests\TestCase\Unit\Stubs\FakePersistentCollection;
 use MapperBundle\Tests\TestCase\Unit\Stubs\FakePersistentCollectionWithNullMappedBy;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class ORMPreLoaderTest extends TestCase
 {
     private ORMPreLoader $preLoader;
-    private EntityManagerInterface $em;
+    private EntityManagerInterface|MockObject $em;
 
     protected function setUp(): void
     {
@@ -72,22 +73,24 @@ class ORMPreLoaderTest extends TestCase
         $classMetadataMock = $this->createMock(ClassMetadata::class);
         $classMetadataMock
             ->method('getName')
-            ->willReturn(SourceEntity::class);
+            ->willReturn(SourceEntity::class)
+        ;
         $classMetadataMock
             ->method('getIdentifierValues')
-            ->willReturnCallback(function ($entity) {
-                return ['id' => $entity->id];
-            });
+            ->willReturnCallback(static fn ($entity) => ['id' => $entity->id])
+        ;
         $classMetadataMock
             ->method('getReflectionProperty')
-            ->willReturn(new \ReflectionProperty(TargetEntity::class, 'owner'));
+            ->willReturn(new \ReflectionProperty(TargetEntity::class, 'owner'))
+        ;
         $this->em->method('getClassMetadata')->willReturn($classMetadataMock);
 
         $repositoryMock = $this->createMock(EntityRepository::class);
         $repositoryMock
             ->method('findBy')
-            ->willReturn([new TargetEntity($entity), new TargetEntity($entity)]);
-        $this->em->method('getRepository')->willReturnCallback(function ($class) use ($repositoryMock) {
+            ->willReturn([new TargetEntity($entity), new TargetEntity($entity)])
+        ;
+        $this->em->method('getRepository')->willReturnCallback(static function ($class) use ($repositoryMock) {
             if (TargetEntity::class === $class) {
                 return $repositoryMock;
             }
@@ -98,7 +101,8 @@ class ORMPreLoaderTest extends TestCase
         $configMock = $this->createMock(Configuration::class);
         $configMock
             ->method('getEagerFetchBatchSize')
-            ->willReturn(10);
+            ->willReturn(10)
+        ;
         $this->em->method('getConfiguration')->willReturn($configMock);
     }
 }
