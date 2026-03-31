@@ -24,9 +24,9 @@ class Mapper implements MapperInterface
         AutoMapperInterface $autoMapper,
         PropertyInfoExtractor $extractor,
         PreloaderInterface $preLoader,
-        AutoMapperAdapterInterface|null $adapter = null,
+        ?AutoMapperAdapterInterface $adapter = null,
     ) {
-        if ($adapter === null) {
+        if (null === $adapter) {
             $this->adapter = new AutoMapperPlusAdapter($autoMapper, $extractor);
         } else {
             $this->adapter = $adapter;
@@ -36,7 +36,7 @@ class Mapper implements MapperInterface
     }
 
     /**
-     * @param array|object $source
+     * @param array|object        $source
      * @param array|object|string $destination
      *
      * @return array|mixed|object|null
