@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace MapperBundle\Tests\TestCase\Unit\Mapper;
 
+use AutoMapperPlus\AutoMapper;
 use AutoMapperPlus\Configuration\MappingInterface;
 use AutoMapperPlus\DataType;
 use AutoMapperPlus\Exception\UnregisteredMappingException;
@@ -14,6 +15,7 @@ use MapperBundle\PreLoader\PreloaderInterface;
 use MapperBundle\Tests\TestCase\Unit\Stubs\DTO\ExampleDto;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
 
 class MapperTest extends TestCase
 {
@@ -27,8 +29,10 @@ class MapperTest extends TestCase
         $this->preLoader = $this->createMock(PreloaderInterface::class);
 
         $this->mapper = new Mapper(
-            $this->adapter,
+            new AutoMapper(),
+            new PropertyInfoExtractor(),
             $this->preLoader,
+            $this->adapter,
         );
     }
 

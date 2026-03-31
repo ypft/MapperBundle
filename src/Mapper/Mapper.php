@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace MapperBundle\Mapper;
 
+use AutoMapperPlus\AutoMapperInterface;
 use AutoMapperPlus\Exception\UnregisteredMappingException;
 use MapperBundle\Adapter\AutoMapperAdapterInterface;
+use MapperBundle\Adapter\AutoMapperPlusAdapter;
 use MapperBundle\Configuration\AutoMapperConfig;
 use MapperBundle\PreLoader\PreloaderInterface;
+use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
 
 /**
  * Class Mapper.
@@ -18,15 +21,22 @@ class Mapper implements MapperInterface
     private PreloaderInterface $preLoader;
 
     public function __construct(
-        AutoMapperAdapterInterface $adapter,
+        AutoMapperInterface $autoMapper,
+        PropertyInfoExtractor $extractor,
         PreloaderInterface $preLoader,
+        AutoMapperAdapterInterface|null $adapter = null,
     ) {
-        $this->adapter = $adapter;
+        if ($adapter === null) {
+            $this->adapter = new AutoMapperPlusAdapter($autoMapper, $extractor);
+        } else {
+            $this->adapter = $adapter;
+        }
+
         $this->preLoader = $preLoader;
     }
 
     /**
-     * @param array|object        $source
+     * @param array|object $source
      * @param array|object|string $destination
      *
      * @return array|mixed|object|null

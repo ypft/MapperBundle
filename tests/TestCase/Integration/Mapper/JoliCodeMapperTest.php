@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace MapperBundle\Tests\TestCase\Integration\Mapper;
 
+use AutoMapperPlus\AutoMapper;
 use MapperBundle\Adapter\JoliCodeAdapter;
 use MapperBundle\Mapper\Mapper;
 use MapperBundle\PreLoader\NullPreLoader;
 use MapperBundle\Tests\TestCase\Unit\Stubs\DTO\DefaultMappingOutputDto;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
 
 class JoliCodeMapperTest extends TestCase
 {
@@ -16,11 +18,11 @@ class JoliCodeMapperTest extends TestCase
 
     protected function setUp(): void
     {
-        $adapter = new JoliCodeAdapter();
-
         $this->mapper = new Mapper(
-            $adapter,
+            new AutoMapper(),
+            new PropertyInfoExtractor(),
             new NullPreLoader(),
+            new JoliCodeAdapter(),
         );
     }
 

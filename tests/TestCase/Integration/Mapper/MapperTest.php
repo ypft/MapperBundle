@@ -38,8 +38,10 @@ class MapperTest extends TestCase
         );
 
         $this->mapper = new Mapper(
-            $adapter,
+            new AutoMapper(),
+            $extractor,
             new NullPreLoader(),
+            $adapter,
         );
     }
 
